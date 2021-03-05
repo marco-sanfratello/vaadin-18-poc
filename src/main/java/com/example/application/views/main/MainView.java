@@ -1,7 +1,8 @@
 package com.example.application.views.main;
 
-import java.util.Optional;
-
+import com.example.application.views.cardlist.CardListView;
+import com.example.application.views.formular.FormularView;
+import com.example.application.views.umläufe.UmläufeView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -9,23 +10,18 @@ import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.avatar.Avatar;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dependency.JsModule;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
-import com.vaadin.flow.router.RouterLink;
-import com.vaadin.flow.server.PWA;
-import com.vaadin.flow.theme.Theme;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
-import com.example.application.views.main.MainView;
-import com.example.application.views.umläufe.UmläufeView;
-import com.example.application.views.cardlist.CardListView;
-import com.example.application.views.formular.FormularView;
+import com.vaadin.flow.router.RouterLink;
+
+import java.util.Optional;
 
 /**
  * The main view is a top-level placeholder for other views.
@@ -65,11 +61,11 @@ public class MainView extends AppLayout {
         layout.setSpacing(false);
         layout.getThemeList().set("spacing-s", true);
         layout.setAlignItems(FlexComponent.Alignment.STRETCH);
-        HorizontalLayout logoLayout = new HorizontalLayout();
+        VerticalLayout logoLayout = new VerticalLayout();
+        logoLayout.getThemeList().set("dark", true);
         logoLayout.setId("logo");
         logoLayout.setAlignItems(FlexComponent.Alignment.CENTER);
-        logoLayout.add(new Image("images/logo.png", "Flow (Java only) logo"));
-        logoLayout.add(new H1("Flow (Java only)"));
+        logoLayout.add(new Image("images/logo.png", "Sprouts fly office"));
         layout.add(logoLayout, menu);
         return layout;
     }
