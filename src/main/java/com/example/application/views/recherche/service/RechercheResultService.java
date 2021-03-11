@@ -52,33 +52,42 @@ public class RechercheResultService implements DataService<RechercheResult, Stri
 
     private List<RechercheResult> generateData(int amount) {
         List<RechercheResult> items = new ArrayList<>();
+        int Airport = 0, Handler = 0, Hotel = 0, LocalContact = 0, NationalContact = 0, RentalCar = 0, CateringCompany = 0;
         for (int i = 0; i < amount; i++) {
             RechercheResult item = new RechercheResult();
             item.setId(String.valueOf(i + 1));
             RechercheResult.Type randomType;
+            int num;
             switch ((int) (Math.random() * 7)) {
                 case 0:
                     randomType = RechercheResult.Type.Airport;
+                    num = ++Airport;
                     break;
                 case 1:
                     randomType = RechercheResult.Type.Handler;
+                    num = ++Handler;
                     break;
                 case 2:
                     randomType = RechercheResult.Type.Hotel;
+                    num = ++Hotel;
                     break;
                 case 3:
                     randomType = RechercheResult.Type.LocalContact;
+                    num = ++LocalContact;
                     break;
                 case 4:
                     randomType = RechercheResult.Type.NationalContact;
+                    num = ++NationalContact;
                     break;
                 case 5:
                     randomType = RechercheResult.Type.RentalCar;
+                    num = ++RentalCar;
                     break;
                 default:
                     randomType = RechercheResult.Type.CateringCompany;
+                    num = ++CateringCompany;
             }
-            item.setCaption(randomType.getClass().getName());
+            item.setCaption("This is the " + num + ". " + randomType.toString());
             item.setType(randomType);
             item.setPersistent(Math.random() > .5);
             item.setTransient(Math.random() > .75);
