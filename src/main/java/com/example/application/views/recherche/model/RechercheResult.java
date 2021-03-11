@@ -1,9 +1,12 @@
-package com.example.application.views.recherche;
+package com.example.application.views.recherche.model;
 
 public class RechercheResult {
     private String id;
     private Type type;
     private String caption;
+
+    private boolean isPersistent;
+    private boolean isTransient;
 
     public String getId() {
         return id;
@@ -30,11 +33,28 @@ public class RechercheResult {
     }
 
     public boolean isPersistent() {
-        return getId() != null;
+        return isPersistent;
+    }
+
+    public void setPersistent(boolean persistent) {
+        isPersistent = persistent;
     }
 
     public boolean isTransient() {
-        return getId() == null;
+        return isTransient;
+    }
+
+    public void setTransient(boolean aTransient) {
+        isTransient = aTransient;
+    }
+
+    @Override
+    public String toString() {
+        return "RechercheResult{" +
+                "id='" + id + '\'' +
+                ", type=" + type +
+                ", caption='" + caption + '\'' +
+                '}';
     }
 
     public enum Type {

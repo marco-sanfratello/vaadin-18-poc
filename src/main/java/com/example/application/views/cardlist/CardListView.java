@@ -1,10 +1,8 @@
 package com.example.application.views.cardlist;
 
-import java.util.Arrays;
-import java.util.List;
-
+import com.example.application.views.cardlist.model.CardListPerson;
+import com.example.application.views.main.MainView;
 import com.vaadin.flow.component.dependency.CssImport;
-import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
@@ -15,27 +13,43 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
-import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.PageTitle;
-import com.example.application.views.main.MainView;
+import com.vaadin.flow.router.Route;
+
+import java.util.Arrays;
+import java.util.List;
 
 @CssImport("./views/cardlist/card-list-view.css")
 @Route(value = "card-list", layout = MainView.class)
 @PageTitle("Card List")
 public class CardListView extends Div implements AfterNavigationObserver {
 
-    Grid<Person> grid = new Grid<>();
+    Grid<CardListPerson> grid = new Grid<>();
 
     public CardListView() {
         addClassName("card-list-view");
         setSizeFull();
         grid.setHeight("100%");
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
-        grid.addComponentColumn(person -> createCard(person));
+        grid.addComponentColumn(this::createCard);
         add(grid);
     }
 
-    private HorizontalLayout createCard(Person person) {
+    private static CardListPerson createPerson(
+            String image, String name, String date, String post, String likes, String comments, String shares
+    ) {
+        CardListPerson p = new CardListPerson();
+        p.setImage(image);
+        p.setName(name);
+        p.setDate(date);
+        p.setPost(post);
+        p.setLikes(likes);
+        p.setComments(comments);
+        p.setShares(shares);
+        return p;
+    }
+
+    private HorizontalLayout createCard(CardListPerson person) {
         HorizontalLayout card = new HorizontalLayout();
         card.addClassName("card");
         card.setSpacing(false);
@@ -88,7 +102,7 @@ public class CardListView extends Div implements AfterNavigationObserver {
     public void afterNavigation(AfterNavigationEvent event) {
 
         // Set some data when this view is displayed.
-        List<Person> persons = Arrays.asList( //
+        List<CardListPerson> persons = Arrays.asList( //
                 createPerson("https://randomuser.me/api/portraits/men/42.jpg", "John Smith", "May 8",
                         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document without relying on meaningful content (also called greeking).",
                         "1K", "500", "20"),
@@ -139,19 +153,4 @@ public class CardListView extends Div implements AfterNavigationObserver {
 
         grid.setItems(persons);
     }
-
-    private static Person createPerson(String image, String name, String date, String post, String likes,
-            String comments, String shares) {
-        Person p = new Person();
-        p.setImage(image);
-        p.setName(name);
-        p.setDate(date);
-        p.setPost(post);
-        p.setLikes(likes);
-        p.setComments(comments);
-        p.setShares(shares);
-
-        return p;
-    }
-
 }

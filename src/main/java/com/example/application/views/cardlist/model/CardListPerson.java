@@ -1,6 +1,6 @@
-package com.example.application.views.cardlist;
+package com.example.application.views.cardlist.model;
 
-public class Person {
+public class CardListPerson {
 
     private String image;
     private String name;
@@ -10,7 +10,7 @@ public class Person {
     private String comments;
     private String shares;
 
-    public Person() {
+    public CardListPerson() {
     }
 
     public String getImage() {

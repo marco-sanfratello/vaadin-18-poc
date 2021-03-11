@@ -1,5 +1,9 @@
 # Flow (Java only)
 
+## Notes and links
+- [Filtering in ui](https://vaadin.com/components/vaadin-grid/java-examples/filtering)
+- [Filtering in backend](https://vaadin.com/docs/flow/binding-data/tutorial-flow-data-provider.html)
+
 This is an example project that can be used as a starting point to create your own Vaadin application with Spring Boot.
 It contains all the necessary configuration and some placeholder files to get you started.
 

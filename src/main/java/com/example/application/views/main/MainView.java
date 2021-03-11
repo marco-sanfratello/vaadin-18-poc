@@ -2,7 +2,8 @@ package com.example.application.views.main;
 
 import com.example.application.views.cardlist.CardListView;
 import com.example.application.views.formular.FormularView;
-import com.example.application.views.umläufe.UmläufeView;
+import com.example.application.views.person.PersonController;
+import com.example.application.views.recherche.GridController;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentUtil;
 import com.vaadin.flow.component.applayout.AppLayout;
@@ -19,6 +20,7 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.component.tabs.TabsVariant;
 import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
 
 import java.util.Optional;
@@ -38,6 +40,13 @@ public class MainView extends AppLayout {
         addToNavbar(true, createHeaderContent());
         menu = createMenu();
         addToDrawer(createDrawerContent(menu));
+    }
+
+    private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
+        final Tab tab = new Tab();
+        tab.add(new RouterLink(text, navigationTarget));
+        ComponentUtil.setData(tab, Class.class, navigationTarget);
+        return tab;
     }
 
     private Component createHeaderContent() {
@@ -80,15 +89,12 @@ public class MainView extends AppLayout {
     }
 
     private Component[] createMenuItems() {
-        return new Tab[]{createTab("Umläufe", UmläufeView.class), createTab("Card List", CardListView.class),
-                createTab("Formular", FormularView.class)};
-    }
-
-    private static Tab createTab(String text, Class<? extends Component> navigationTarget) {
-        final Tab tab = new Tab();
-        tab.add(new RouterLink(text, navigationTarget));
-        ComponentUtil.setData(tab, Class.class, navigationTarget);
-        return tab;
+        return new Tab[]{
+                createTab("Personen", PersonController.class),
+                createTab("Grid Example", GridController.class),
+                createTab("Card List", CardListView.class),
+                createTab("Formular", FormularView.class)
+        };
     }
 
     @Override
